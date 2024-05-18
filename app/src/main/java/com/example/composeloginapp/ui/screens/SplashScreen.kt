@@ -2,11 +2,12 @@ package com.example.composeloginapp.ui.screens
 
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.os.Build
-import android.window.SplashScreen
+import android.view.animation.OvershootInterpolator
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
@@ -25,15 +28,32 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.navigation.NavHostController
 import com.example.composeloginapp.R
+import kotlinx.coroutines.delay
 
-@Preview
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navController: NavHostController) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        val scale = remember {
+            Animatable(0f)
+        }
+
+        LaunchedEffect(key1 = Unit) {
+            scale.animateTo(
+                targetValue = 0.7f,
+                animationSpec = tween(
+                    durationMillis = 800,
+                    easing = {
+                        OvershootInterpolator(4f).getInterpolation(it)
+                    })
+            )
+            delay(2500)
+            navController.navigate("login")
+        }
         Image(
             painter = adaptiveIconPainterResource(id = R.mipmap.ic_launcher_round),
             contentDescription = "App Logo",
