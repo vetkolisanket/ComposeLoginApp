@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlinKapt)
 }
 
 android {
@@ -62,6 +64,10 @@ dependencies {
     //Navigation
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    //Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
 
     testImplementation(libs.junit)
@@ -71,4 +77,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

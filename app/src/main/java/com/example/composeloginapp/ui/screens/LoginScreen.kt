@@ -19,8 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,10 +31,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.composeloginapp.R
 import com.example.composeloginapp.ui.LoginViewModel
@@ -45,7 +42,7 @@ import com.example.composeloginapp.ui.UIState
 @Composable
 fun LoginScreen(navController: NavHostController) {
     val localFocusManager = LocalFocusManager.current
-    val viewModel: LoginViewModel = viewModel()
+    val viewModel: LoginViewModel = hiltViewModel()
     val username = remember {
         mutableStateOf("")
     }

@@ -15,7 +15,9 @@ import com.example.composeloginapp.ui.screens.HomeScreen
 import com.example.composeloginapp.ui.screens.LoginScreen
 import com.example.composeloginapp.ui.screens.SplashScreen
 import com.example.composeloginapp.ui.theme.ComposeLoginAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
