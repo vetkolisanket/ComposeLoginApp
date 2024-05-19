@@ -36,6 +36,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.example.composeloginapp.R
+import com.example.composeloginapp.core.Route
 import com.example.composeloginapp.ui.LoginViewModel
 import com.example.composeloginapp.ui.UIState
 
@@ -65,7 +66,7 @@ fun LoginScreen(navController: NavHostController) {
         UIState.Loading -> showProgress.value = true
         is UIState.Success -> {
             showProgress.value = false
-            navController.navigate("home")
+            navController.navigate(Route.Home.route)
         }
 
         else -> Unit

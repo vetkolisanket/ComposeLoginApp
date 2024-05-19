@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,12 +28,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.example.composeloginapp.R
+import com.example.composeloginapp.core.Route
+import com.example.composeloginapp.ui.SplashViewModel
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(navController: NavHostController) {
+    val viewModel: SplashViewModel = hiltViewModel()
+    val isUserLoggedIn by viewModel.isUserLoggedIn()
+        .collectAsStateWithLifecycle(initialValue = null)
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -51,7 +60,11 @@ fun SplashScreen(navController: NavHostController) {
                     })
             )
             delay(2500)
-            navController.navigate("login")
+            if (isUserLoggedIn == true) {
+                navController.navigate(Route.Home.route)
+            } else if (isUserLoggedIn == false) {
+                navController.navigate(Route.Login.route)
+            }
         }
         Image(
             painter = adaptiveIconPainterResource(id = R.mipmap.ic_launcher_round),
