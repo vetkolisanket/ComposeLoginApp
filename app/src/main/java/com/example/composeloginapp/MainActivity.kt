@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.composeloginapp.ui.screens.HomeScreen
 import com.example.composeloginapp.ui.screens.LoginScreen
 import com.example.composeloginapp.ui.screens.SplashScreen
 import com.example.composeloginapp.ui.theme.ComposeLoginAppTheme
@@ -40,7 +41,10 @@ fun App() {
             SplashScreen(navController)
         }
         composable("login") {
-            LoginScreen()
+            LoginScreen(navController)
+        }
+        composable("home") {
+            HomeScreen()
         }
     }
 }

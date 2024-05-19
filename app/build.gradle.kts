@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.material3)
     //Navigation
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
 
 
     testImplementation(libs.junit)
